@@ -1,7 +1,13 @@
 <?php
 
+namespace Forum\endpoints;
+
+use Forum\App;
+
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
+use ReflectionClass;
+use ReflectionMethod;
 use Slim\Routing\RouteCollectorProxy;
 
 class Endpoint
@@ -11,16 +17,12 @@ class Endpoint
 	 */
 	private $pattern;
 
-	function __construct($app, $pattern) {
+	function __construct($pattern) {
 		$this->pattern = $pattern;
 
-		$app->group($pattern, function(RouteCollectorProxy $app) {
+		App::$slim->group($pattern, function(RouteCollectorProxy $app) {
 			$this->loadMethods($app);
 		});
-	}
-
-	public function get_lolec() {
-		return "lulec";
 	}
 
 	private function loadMethods($app) {

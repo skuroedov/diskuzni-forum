@@ -1,20 +1,20 @@
 import React from "react";
 import {Modal} from "react-bootstrap";
 
-interface PMyModal {
-    children: React.ReactNode;
+export interface PMyModal {
+    children?: React.ReactNode;
 }
 
-interface SMyModal {
+export interface SMyModal {
     show: boolean;
 }
 
-export default class MyModal extends React.Component<PMyModal, SMyModal> {
-    constructor(props: PMyModal) {
-        super(props);
+export default class MyModal<P extends PMyModal = PMyModal, S extends SMyModal= SMyModal> extends React.Component<P, S> {
+    constructor(props: P, state: S) {
+        super(props, state);
         this.state = {
-            show: false,
-        }
+            show: true,
+        } as S;
     }
 
     hide(): void {
@@ -27,10 +27,6 @@ export default class MyModal extends React.Component<PMyModal, SMyModal> {
 
     render() {
         return <>
-            <span onClick={() => this.setState({show: true})}>
-                {this.props.children}
-            </span>
-
             <Modal show={this.state.show} onHide={() => this.hide()}>
                 <Modal.Header closeButton>
                     <Modal.Title>{this.title()}</Modal.Title>

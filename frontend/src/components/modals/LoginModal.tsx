@@ -1,15 +1,16 @@
 import React from "react";
 import {Button, Form, FormGroup} from "react-bootstrap";
 
-import MyModal from "./MyModal";
+import {RegisterModal} from "./RegisterModal";
+import {OpenableModal} from "./OpenableModal";
 
-export class LoginModal extends MyModal {
+export class LoginModal extends OpenableModal {
     title(): JSX.Element {
         return <>Přihlášení</>;
     }
 
     body(): JSX.Element {
-        return <Form>
+        return <Form onSubmit={console.log}>
             <FormGroup>
                 <Form.Label>Uživatelské jméno:</Form.Label>
                 <Form.Control type="text" placeholder="Uživatelské jméno" />
@@ -18,11 +19,11 @@ export class LoginModal extends MyModal {
                 <Form.Label>Heslo:</Form.Label>
                 <Form.Control type="password" placeholder="Heslo" />
             </FormGroup>
-            <Button variant="success">Přihlásit se</Button>
+            <Button variant="success" type="submit">Přihlásit se</Button>
         </Form>;
     }
 
     footer(): JSX.Element {
-        return <>Nemáte účet? Zaregsitrujte se</>;
+        return <>Nemáte účet? <RegisterModal><a href="#">Zaregsitrujte se</a></RegisterModal></>;
     }
 }

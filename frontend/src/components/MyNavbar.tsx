@@ -1,6 +1,7 @@
 import React from "react";
 import {Nav, Navbar} from "react-bootstrap";
-import {LoginModal} from "./LoginModal";
+import {LoginModal} from "./modals/LoginModal";
+import {RegisterModal} from "./modals/RegisterModal";
 
 export class MyNavbar extends React.Component {
     render(): JSX.Element {
@@ -16,6 +17,9 @@ export class MyNavbar extends React.Component {
                     <LoginModal>
                         <Nav.Link href="#">Přihlásit se</Nav.Link>
                     </LoginModal>
+                    <RegisterModal>
+                        <Nav.Link href="#">Zaregistrovat se</Nav.Link>
+                    </RegisterModal>
                 </Nav>
             </Navbar.Collapse>
         </Navbar>

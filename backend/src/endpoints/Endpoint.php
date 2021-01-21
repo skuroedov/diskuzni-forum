@@ -12,15 +12,12 @@ use Slim\Routing\RouteCollectorProxy;
 
 class Endpoint
 {
-	/**
-	 * @var string
-	 */
-	private $pattern;
+	private string $pattern;
 
 	function __construct($pattern) {
 		$this->pattern = $pattern;
 
-		App::$slim->group($pattern, function(RouteCollectorProxy $app) {
+		App::getSlim()->group($pattern, function(RouteCollectorProxy $app) {
 			$this->loadMethods($app);
 		});
 	}
@@ -48,7 +45,6 @@ class Endpoint
 				$methodReflection = new ReflectionMethod($this, $method->name);
 				$params = $methodReflection->getParameters();
 
-				error_log($requestMethod);
 				if($requestMethod != 'post_') {
 					foreach($params as $param) {
 						$path .= "/{{$param->getName()}}";
@@ -56,7 +52,7 @@ class Endpoint
 				}
 
 				$app->{substr($requestMethod, 0, -1)}($path, function(Request $request, Response $response, $args) use ($method, $requestMethod) {
-					if($requestMethod == 'post_') $args += $_POST;
+					if($requestMethod == 'post_') $args += json_decode(file_get_contents('php://input'), yes);
 					$response->getBody()->write($method->invokeArgs($this, $args));
 					return $response;
 				});

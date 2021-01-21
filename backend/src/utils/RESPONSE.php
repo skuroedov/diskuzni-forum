@@ -3,10 +3,10 @@
 namespace Forum\utils;
 class RESPONSE {
 	public int $status;
-	public string $content;
+	public $content;
 	public string $msg;
 
-	public function __construct(int $status, string $content, string $msg) {
+	public function __construct(int $status, $content, string $msg) {
 		$this->status = $status;
 		$this->content = $content;
 		$this->msg = $msg;

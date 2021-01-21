@@ -3,11 +3,11 @@
 namespace Forum\utils;
 
 class RESPONSES {
-	private static function MY_RESPONSE(int $status, string $content, string $msg) {
+	private static function MY_RESPONSE(int $status, $content, string $msg) {
 		return (new RESPONSE($status, $content, $msg));
 	}
 
-	public static function OK(string $content) {
+	public static function OK($content) {
 		return RESPONSES::MY_RESPONSE(200, $content, 'OK');
 	}
 

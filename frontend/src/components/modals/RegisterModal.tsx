@@ -5,6 +5,7 @@ import {OpenableModal} from "./OpenableModal";
 import {API_URL} from "../../constants";
 import {PMyModal, SMyModal} from "./MyModal";
 import {ErrorModal} from "./ErrorModal";
+import {OkModal} from "./OkModal";
 
 
 export interface SRegisterModal extends SMyModal {
@@ -66,9 +67,10 @@ export class RegisterModal extends OpenableModal<PMyModal, SRegisterModal> {
             email: email
         });
 
-        console.log(res.data);
         if(res.data.status != 200) {
-            this.setState({modals: <ErrorModal msg={res.data.msg} />})
+            this.setState({modals: <ErrorModal msg={res.data.msg} />});
+        } else {
+            this.setState({modals: <OkModal msg={res.data.msg} />});
         }
     }
 

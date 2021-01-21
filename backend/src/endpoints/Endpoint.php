@@ -52,7 +52,11 @@ class Endpoint
 				}
 
 				$app->{substr($requestMethod, 0, -1)}($path, function(Request $request, Response $response, $args) use ($method, $requestMethod) {
-					if($requestMethod == 'post_') $args += json_decode(file_get_contents('php://input'), yes);
+					if($requestMethod == 'post_') {
+						if(sizeof($_POST) == 0)
+							$args += json_decode(file_get_contents('php://input'), 1);
+						else $args += $_POST;
+					}
 					$response->getBody()->write($method->invokeArgs($this, $args));
 					return $response;
 				});

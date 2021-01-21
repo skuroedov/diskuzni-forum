@@ -15,7 +15,9 @@ class Arrays {
 
 	public static function arrayAssocToObj(array $arr, string $class): array {
 		$result = [];
-		foreach($arr as $item) {
+		foreach($arr as $key => $item) {
+			if(!is_int($key))
+				return [Arrays::singleAssocToObj($arr, $class)];
 			array_push($result, Arrays::singleAssocToObj($item, $class));
 		}
 		return $result;

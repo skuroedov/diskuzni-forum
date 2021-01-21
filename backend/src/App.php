@@ -4,6 +4,7 @@ namespace Forum;
 
 use Forum\endpoints\Auth;
 use Forum\endpoints\Frontend;
+use Forum\endpoints\Thread;
 use Forum\endpoints\User;
 use Medoo\Medoo;
 use Noodlehaus\Config;
@@ -38,6 +39,7 @@ class App {
 	private function loadEndpoints(): void {
 		$this->registerEndpoint(Auth::class, '/api/v1/auth');
 		$this->registerEndpoint(User::class, '/api/v1/user');
+		$this->registerEndpoint(Thread::class, '/api/v1/thread');
 		$this->registerEndpoint(Frontend::class, '/frontend');
 	}
 

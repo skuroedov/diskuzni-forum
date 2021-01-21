@@ -57,6 +57,7 @@ class Endpoint
 							$args += json_decode(file_get_contents('php://input'), 1);
 						else $args += $_POST;
 					}
+					$response = $response->withHeader('Content-Type', 'application/json');
 					$response->getBody()->write($method->invokeArgs($this, $args));
 					return $response;
 				});
